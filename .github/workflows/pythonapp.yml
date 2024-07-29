@@ -49,7 +49,7 @@ jobs:
       run: |
         export HEROKU_API_KEY=$HEROKU_SSH_KEY
         heroku ps:scale web=1
-        heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+        heroku git:remote -a my-app123
         git push heroku main
 
 
