@@ -44,12 +44,13 @@ jobs:
     - name: Deploy to Heroku
       env:
         HEROKU_SSH_KEY: ${{ secrets.HEROKU_SSH_KEY }}
-        #HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
         export HEROKU_API_KEY=$HEROKU_SSH_KEY
+        export HEROKU_APP=$HEROKU_APP_NAME
         heroku ps:scale web=1
-        heroku git:remote -a my-app123
+        heroku git:remote
         git push heroku main
 
 
