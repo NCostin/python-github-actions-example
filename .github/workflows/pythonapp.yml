@@ -49,6 +49,7 @@ jobs:
       run: |
         export HEROKU_API_KEY=$HEROKU_SSH_KEY
         export HEROKU_APP=$HEROKU_APP_NAME
+        heroku run env
         heroku git:remote
         git push heroku main
 
