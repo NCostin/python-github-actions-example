@@ -43,14 +43,10 @@ jobs:
         pytest
     - name: Deploy to Heroku
       env:
-        HEROKU_PASSWORD: ${{ secrets.HEROKU_PASSWORD }}
-        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-        HEROKU_USERNAME: ${{ secrets.HEROKU_USERNAME }}
+        HEROKU_SSH_KEY: ${{ secrets.HEROKU_SSH_KEY }}
       if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
-        heroku login -i
-        HEROKU_USERNAME
-        HEROKU_PASSWORD
+        export HEROKU_API_KEY=HEROKU_SSH_KEY
         heroku git:remote -a $HEROKU_APP_NAME
         git push heroku main
 
