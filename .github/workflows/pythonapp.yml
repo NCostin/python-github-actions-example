@@ -47,5 +47,6 @@ jobs:
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
+        curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
         heroku git:remote -a my-app123
         git push heroku main
