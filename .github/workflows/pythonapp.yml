@@ -43,9 +43,9 @@ jobs:
         pytest
     - name: Deploy to Heroku
       env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
-        export HEROKU_API_KEY=${{ secrets.HEROKU_API_TOKEN }}
-        heroku git:remote -a my-app123
+        git remote add heroku https://git.heroku.com/my-app123.git
         git push heroku main
