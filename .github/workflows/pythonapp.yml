@@ -42,11 +42,9 @@ jobs:
         export PYTHONPATH=src
         pytest
     - name: Deploy to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      if: github.ref == 'refs/heads/main' && job.status == 'success'
-      run: |
-        curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-        heroku git:remote -a my-app123
-        git push heroku main
+      uses: akhileshns/heroku-deploy@v3.13.15
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "myapp4" #Must be unique in Heroku
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+
